@@ -1,0 +1,125 @@
+﻿@model Cars.Models.Car
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<header>
+
+    <!-- Heading -->
+    <div class="bg-primary">
+    </div>
+    <!-- Heading -->
+</header>
+
+<!-- content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <aside class="col-lg-6">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center">
+
+                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image">
+
+
+                        @if (!string.IsNullOrEmpty(Model?.ImageName))
+                        {
+
+                            var imageNames = Model.ImageName.Split(',');
+
+                            foreach (var imageName in imageNames)
+                            {
+                                if (imageName == imageNames.First())
+                                {
+                                    <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@Url.Content("~/Image/" + imageName)" />
+
+
+                                }
+                                else
+                                {
+
+                                    <img width="150" height="150" class="rounded-2" src="@Url.Content("~/Image/" + imageName)" />
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p>No images available.</p>
+                        }
+
+
+
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" class="item-thumb">
+
+                    </a>
+
+                </div>
+                <!-- thumbs-wrap.// -->
+                <!-- gallery-wrap .end// -->
+            </aside>
+
+            <main class="col-lg-6">
+                <div class="ps-lg-3">
+                    <h4 class="title text-dark">
+
+                        @Html.DisplayFor(model => model.ModelName)
+
+                    </h4>
+                    <div class="d-flex flex-row my-3">
+                        <div class="text-warning mb-1 me-2">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="h5">$@Html.DisplayFor(model => model.Price)</span>
+
+                    </div>
+                    <h3>Description</h3>
+
+                    <p>
+                        @Html.Raw(Model.Description)
+                    </p>
+                    <h3>Features</h3>
+                    <p>
+                        @Html.Raw(Model.Features)
+                    </p>
+
+                    <div class="row">
+                        <dt class="col-3">Brand</dt>
+                        <dd class="col-9"> @Html.DisplayFor(model => model.Brand)</dd>
+
+                        <dt class="col-3">Class</dt>
+                        <dd class="col-9"> @Html.DisplayFor(model => model.Class)</dd>
+
+
+                        <dt class="col-3">Model Code</dt>
+                        <dd class="col-9"> @Html.DisplayFor(model => model.ModelCode)</dd>
+
+                        <dt class="col-3">Active Status</dt>
+                        <dd class="col-9"> @Html.DisplayFor(model => model.Active)</dd>
+                    </div>
+
+                    <hr />
+
+
+
+                    <a asp-action="Index" class="btn btn-primary shadow-0">Back to List</a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning shadow-0">Edit</a>
+
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+<!-- content -->

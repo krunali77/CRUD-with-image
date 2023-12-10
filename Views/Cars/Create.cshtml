@@ -1,0 +1,101 @@
+﻿@model Cars.Models.Car
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Car</h4>
+<hr />
+<div class="row">
+    <div class="col-md-11">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Brand"></label>
+                <select asp-for="Brand" class="form-select" aria-label="Select Car Brand">
+                    <option selected>Select</option>
+                    <option value="Audi">Audi</option>
+                    <option value="jaguar">jaguar</option>
+                    <option value="Land rover">Land rover</option>
+                    <option value="Renault">Renault</option>
+                </select>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Class"></label>
+                <select asp-for="Class" class="form-select" aria-label="Select Car Class">
+                    <option selected>Select</option>
+                    <option value="A-Class">A-Class</option>
+                    <option value="B-Class">B-Class</option>
+                    <option value="C-Class">C-Class</option>
+                </select>
+                <span asp-validation-for="Class" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ModelName" class="control-label"></label>
+                <input asp-for="ModelName" class="form-control" />
+                <span asp-validation-for="ModelName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ModelCode" class="control-label"></label>
+                <input asp-for="ModelCode" class="form-control" />
+                <span asp-validation-for="ModelCode" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" id="Description" class="ckeditor" name="Description" rows="20"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Features" class="control-label"></label>
+                <textarea asp-for="Features" id="Features" class="ckeditor" name="Features" rows="20"></textarea>
+                <span asp-validation-for="Features" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ManufacturingDate" class="control-label"></label>
+                <input asp-for="ManufacturingDate" class="form-control" type="date" />
+                <span asp-validation-for="ManufacturingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="SortOrder" class="control-label"></label>
+                <input asp-for="SortOrder" class="form-control" />
+                <span asp-validation-for="SortOrder" class="text-danger"></span>
+            </div>  
+
+            <div class="form-group mb-3">
+            <label asp-for="CarImages"></label>
+            <input asp-for="CarImages" type="file" accept="image/*" multiple  />
+            <span asp-validation-for="CarImages" class="text-danger"></span>
+        </div>
+            <div class="form-group mb-3">
+                <input type="submit" value="Create" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary shadow-0">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('#Description');
+    });
+</script>
