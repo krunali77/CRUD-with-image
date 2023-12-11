@@ -9,7 +9,9 @@
 <hr />
 <div class="row">
     <div class="col-md-11">
-        <form asp-action="Edit">
+
+            <form action="Edit" enctype="multipart/form-data" method="post">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">
@@ -62,16 +64,40 @@
                 <input asp-for="SortOrder" class="form-control" />
                 <span asp-validation-for="SortOrder" class="text-danger"></span>
             </div>
-             <div class="form-group mb-3">
-                <label asp-for="CarImages" class="control-label"></label>
-                <br />
-                <input asp-for="CarImages" accept="image/*" />
+   
+
+                <!-- Display existing images -->
+                <div class="form-group mb-3">
+                    <label for="existingImages" class="control-label">Existing Images</label>
+                    <br />
+                    @if (!string.IsNullOrEmpty(Model.ImageName))
+                    {
+                        var existingImages = Model.ImageName.Split(',');
+                        foreach (var imageName in existingImages)
+                        {
+                            <img src="@Url.Content("~/Image/" + imageName)" class="existing-image" width="120px" height="80px" />
+                        }
+                    }
+                    else
+                    {
+                        <span>No existing images</span>
+                    }
+                </div>
+
+                
+            <div class="form-group mb-3">
+                <label asp-for="CarImages"></label>
+                <input asp-for="CarImages" type="file" accept="image/*" multiple  />
                 <span asp-validation-for="CarImages" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
-                <input type="submit" value="Save" class="btn btn-primary"/>
-            </div>
-        </form>
+
+                
+
+                <div class="form-group mb-3">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+                </form>
     </div>
 </div>
 

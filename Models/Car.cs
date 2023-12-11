@@ -47,6 +47,7 @@ namespace Cars.Models
 
         public string ImageName { get; set; } = string.Empty;
 
+        
 
         [NotMapped]
         [Required]

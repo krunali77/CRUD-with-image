@@ -10,6 +10,13 @@
 <p>
     <a asp-action="Create" class="btn btn-info">Create New</a>
 </p>
+<form asp-action="Index" asp-controller="Cars" method="get">
+    <p>
+        <input type="text" name="searchString" class="col-md-4" value="@ViewBag.CurrentFilter" placeholder="Search by Model Name or Model Code" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -23,15 +30,13 @@
                 @Html.DisplayNameFor(model => model.Class)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ModelName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.NameSortParam">Model Name</a>
             </th>
-          
-          
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                Date
+            <a asp-action="Index" asp-route-sortOrder="@ViewBag.DateSortParam">ManufacturingDate</a>
             </th>
             
             <th>
